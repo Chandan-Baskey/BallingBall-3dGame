@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     Rigidbody ball;
     public float ballForce;
+    [SerializeField] float conrollingForce;
     void Start()
     {
         ball = GetComponent<Rigidbody>();
@@ -20,12 +21,12 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey("a"))
         {
-             ball.AddForce(-ballForce, 0, 0); // Add a leftward force to the ball when the "a" key is pressed
+             ball.AddForce(-conrollingForce* Time.deltaTime, 0, 0); // Add a leftward force to the ball when the "a" key is pressed
         }
         if(Input.GetKey("d"))
         {
-             ball.AddForce(ballForce, 0, 0); // Add a rightward force to the ball when the "d" key is pressed
+             ball.AddForce(conrollingForce * Time.deltaTime, 0, 0); // Add a rightward force to the ball when the "d" key is pressed
         }
-        ball.AddForce(0, 0, ballForce); // Add a forward force to the ball at the start of the game
+        ball.AddForce(0, 0, ballForce * Time.deltaTime); // Add a forward force to the ball at the start of the game
     }
 }
