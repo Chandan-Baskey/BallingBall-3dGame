@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     Rigidbody ball;
     public float ballForce;
     [SerializeField] float conrollingForce;
+    int counter = 0;
     void Start()
     {
         ball = GetComponent<Rigidbody>();
@@ -28,5 +29,18 @@ public class Player : MonoBehaviour
              ball.AddForce(conrollingForce * Time.deltaTime, 0, 0); // Add a rightward force to the ball when the "d" key is pressed
         }
         ball.AddForce(0, 0, ballForce * Time.deltaTime); // Add a forward force to the ball at the start of the game
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            counter++;
+            Debug.Log(counter); // Increment the counter and log the number of collisions with walls
+        }
+    }
+    public int getCounter()
+    {
+        return counter; // Return the current value of the counter
     }
 }
